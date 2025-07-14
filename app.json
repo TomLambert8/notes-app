@@ -8,6 +8,7 @@
     "scheme": "notesapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "jsEngine": "hermes",
     "ios": {
       "supportsTablet": true
     },
@@ -33,10 +34,13 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-sqlite"
+      
     ],
     "experiments": {
       "typedRoutes": true
     }
+    
   }
 }
