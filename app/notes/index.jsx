@@ -46,7 +46,7 @@ function NotesScreen() {
 	
 	return (
 		<View style={styles.container}>     
-			<NoteList notes={notes} onNotesChange={loadNotes}/>
+			<NoteList notes={notes} onNotesChange={loadNotes} />
 			<TouchableOpacity
 				style={styles.addButton}
 				onPress={() => setModalVisible(true)}
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 	},
 	subtitle:{
 		fontSize:16,
-		color:' #666',
+		color:'#666',
 		textAlign:'center',
 
 	}, 
