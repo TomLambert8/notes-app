@@ -30,7 +30,6 @@ export const initDatabase = async () => {
 export const getNotes = async () => {
   try {
     const notes = await db.getAllAsync('SELECT * FROM notes ORDER BY createdAt DESC');
-    console.log('Retrieved notes:', notes);
     return notes;
   } catch (error) {
     console.error('Error getting notes:', error);
