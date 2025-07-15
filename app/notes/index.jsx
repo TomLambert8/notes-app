@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import AddNoteModal from "../components/AddNoteModal";
-import NoteList from "../components/NoteList";
-import { addNote, getNotes, initDatabase } from "../services/database";
+import { useEffect, useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import AddNoteModal from '../components/AddNoteModal';
+import NoteList from '../components/NoteList';
+import { addNote, getNotes, initDatabase } from '../services/database';
 
 function NotesScreen() {
 	const [notes, setNotes] = useState([]);
@@ -67,8 +67,8 @@ function NotesScreen() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
+		justifyContent: 'center',
+		alignItems: 'center',
 		padding:20,
 	},
 	image: {

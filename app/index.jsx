@@ -1,6 +1,6 @@
-import Logo from '@/assets/images/react-logo.png';
 import { useRouter } from 'expo-router';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Logo from '../assets/images/react-logo.png';
 export default function HomeScreen() {
   const router = useRouter();
   return (
@@ -12,7 +12,7 @@ export default function HomeScreen() {
 
       <TouchableOpacity
       style={styles.button}
-        onPress={() => router.push('notes')}
+        onPress={() => { console.log('Button pressed'); router.push('notes'); }}
       >
         <Text style={styles.btTxt}>Start</Text>
         
@@ -24,8 +24,8 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding:20,
   },
   image: {

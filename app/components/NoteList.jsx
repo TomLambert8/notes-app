@@ -1,6 +1,6 @@
-import { FlatList, StyleSheet, View } from "react-native";
-import { deleteNote } from "../services/database";
-import NoteItem from "./NoteItem";
+import { FlatList, StyleSheet, View } from 'react-native';
+import { deleteNote } from '../services/database';
+import NoteItem from './NoteItem';
 
 const NoteList = ({ notes, onNotesChange }) => {
   const handleDelete = async (id) => {
