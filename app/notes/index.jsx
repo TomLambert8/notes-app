@@ -1,52 +1,35 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNotes } from "../../src/presentation/hooks/useNotes";
 import AddNoteModal from "../components/AddNoteModal";
 import NoteList from "../components/NoteList";
-import { addNote, getNotes, initDatabase } from "../services/database";
 
 function NotesScreen() {
-	const [notes, setNotes] = useState([]);
+	const { notes, addNote, deleteNote } = useNotes();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [newNote, setNewNote] = useState('');
 	
-	useEffect(() => {
-		const setupDatabase = async () => {
-			try {
-				await initDatabase();
-				loadNotes();
-			} catch (error) {
-				console.error('Error setting up database:', error);
-			}
-		};
-		
-		setupDatabase();
-	}, []);
-
-	const loadNotes = async () => {
-		try {
-			const loadedNotes = await getNotes();
-			setNotes(loadedNotes);
-		} catch (error) {
-			console.error('Error loading notes:', error);
-		}
-	};
-	
 	const handleAddNote = async (noteText) => {
-		if (noteText.trim() === '') return;
-		
 		try {
 			await addNote(noteText);
 			setNewNote('');
 			setModalVisible(false);
-			loadNotes();
 		} catch (error) {
 			console.error('Error adding note:', error);
 		}
 	};
+
+	const handleDelete = async (id) => {
+		try {
+			await deleteNote(id);
+		} catch (error) {
+			console.error('Error deleting note:', error);
+		}
+	};
 	
 	return (
-		<View style={styles.container}>     
-			<NoteList notes={notes} onNotesChange={loadNotes} />
+		<View style={styles.container}>
+			<NoteList notes={notes} onDelete={handleDelete} />
 			<TouchableOpacity
 				style={styles.addButton}
 				onPress={() => setModalVisible(true)}

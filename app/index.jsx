@@ -1,21 +1,22 @@
 import Logo from '@/assets/images/react-logo.png';
 import { useRouter } from 'expo-router';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNotes } from "../src/presentation/hooks/useNotes";
 export default function HomeScreen() {
-  const router = useRouter();
+    const router = useRouter();
+    const loadNotes = useNotes();
+
   return (
-    <View
-      style= {styles.container}
-    > <Image source={ Logo } style={styles.image}/>
+    <View style={styles.container}>
+      <Image source={Logo} style={styles.image}/>
       <Text style={styles.title}>Welcome to my first app.</Text>
       <Text style={styles.subtitle}>let's get started !</Text>
-
       <TouchableOpacity
-      style={styles.button}
+        style={styles.button}
         onPress={() => router.push('notes')}
+
       >
         <Text style={styles.btTxt}>Start</Text>
-        
       </TouchableOpacity>
     </View>
   );

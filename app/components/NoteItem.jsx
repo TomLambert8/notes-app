@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    shadowColor: '#000',
-    shadowOffset: {
+    boxShadowColor: '#000',
+    boxShadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    boxShadowOpacity: 0.25,
+    boxShadowRadius: 3.84,
     elevation: 5,
   },
   text: {
