@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Logo from '../assets/images/react-logo.png';
 import { useNotes } from "../src/presentation/hooks/useNotes";
 export default function HomeScreen() {
     const router = useRouter();
