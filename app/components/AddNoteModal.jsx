@@ -25,7 +25,7 @@ const AddNoteModal = ({
   return (
     <Modal
       visible={modalVisible}
-      animationType="slide"
+      animationType='slide'
       transparent={true}
       onRequestClose={() => setModalVisible(false)}
     >
@@ -34,13 +34,13 @@ const AddNoteModal = ({
           <Text style={styles.modalTitle}>Add Note</Text>
           <TextInput
             style={styles.input}
-            placeholder="Write here..."
-            placeholderTextColor="#999"
+            placeholder='Write here...'
+            placeholderTextColor='#999'
             value={newNote || ''}
             onChangeText={(text) => setNewNote(text)}
             multiline={true}
             numberOfLines={4}
-            textAlignVertical="top"
+            textAlignVertical='top'
           />
           <View style={styles.modalButtons}>
             <TouchableOpacity 

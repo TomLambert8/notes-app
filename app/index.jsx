@@ -1,4 +1,3 @@
-import Logo from '@/assets/images/react-logo.png';
 import { useRouter } from 'expo-router';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNotes } from "../src/presentation/hooks/useNotes";
@@ -25,8 +24,8 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding:20,
   },
   image: {
