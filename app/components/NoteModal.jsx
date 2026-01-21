@@ -7,16 +7,19 @@ import {
   View,
 } from 'react-native';
 
-const AddNoteModal = ({
+const NoteModal = ({
   modalVisible,
   setModalVisible,
   newNote,
   setNewNote,
-  addNote,
+  onSave,
+  editingNote = null,
 }) => {
+  const isEditing = editingNote !== null;
+
   const handleSave = () => {
     if (newNote.trim()) {
-      addNote(newNote);
+      onSave(newNote, editingNote?.id);
       setModalVisible(false);
       setNewNote('');
     }
@@ -31,7 +34,7 @@ const AddNoteModal = ({
     >
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Add Note</Text>
+          <Text style={styles.modalTitle}>{isEditing ? 'Edit Note' : 'Add Note'}</Text>
           <TextInput
             style={styles.input}
             placeholder='Write here...'
@@ -123,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddNoteModal;
+export default NoteModal;

@@ -1,21 +1,29 @@
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNotes } from "../../src/presentation/hooks/useNotes";
-import AddNoteModal from "../components/AddNoteModal";
 import NoteList from "../components/NoteList";
+import NoteModal from "../components/NoteModal";
 
 function NotesScreen() {
-	const { notes, addNote, deleteNote } = useNotes();
+	const { notes, addNote, deleteNote, updateNote } = useNotes();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [newNote, setNewNote] = useState('');
+	const [editingNote, setEditingNote] = useState(null);
 	
-	const handleAddNote = async (noteText) => {
+	const handleSaveNote = async (noteText, noteId) => {
 		try {
-			await addNote(noteText);
+			if (noteId) {
+				// Mode édition
+				await updateNote(noteId, noteText);
+			} else {
+				// Mode création
+				await addNote(noteText);
+			}
 			setNewNote('');
+			setEditingNote(null);
 			setModalVisible(false);
 		} catch (error) {
-			console.error('Error adding note:', error);
+			console.error('Error saving note:', error);
 		}
 	};
 
@@ -26,22 +34,35 @@ function NotesScreen() {
 			console.error('Error deleting note:', error);
 		}
 	};
+
+	const handleEdit = (note) => {
+		setEditingNote(note);
+		setNewNote(note.text);
+		setModalVisible(true);
+	};
+
+	const handleAddNew = () => {
+		setEditingNote(null);
+		setNewNote('');
+		setModalVisible(true);
+	};
 	
 	return (
 		<View style={styles.container}>
-			<NoteList notes={notes} onDelete={handleDelete} />
+			<NoteList notes={notes} onDelete={handleDelete} onEdit={handleEdit} />
 			<TouchableOpacity
 				style={styles.addButton}
-				onPress={() => setModalVisible(true)}
+				onPress={handleAddNew}
 			>
 				<Text style={styles.addButtonText}>+</Text>
 			</TouchableOpacity>
-			<AddNoteModal
+			<NoteModal
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}
 				newNote={newNote}
 				setNewNote={setNewNote}
-				addNote={handleAddNote}
+				onSave={handleSaveNote}
+				editingNote={editingNote}
 			/>
 		</View>
 	);

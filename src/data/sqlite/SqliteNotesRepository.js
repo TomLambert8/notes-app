@@ -51,5 +51,13 @@ export class SqliteNotesRepository {
     const result = await this.db.runAsync('DELETE FROM notes WHERE id = ?', [id]);
     return (result.changes ?? 0) > 0;
   }
+  /** @param {number} id @param {{ text: string }} input @returns {Promise<boolean>} */
+  async update(id, input) {
+    const result = await this.db.runAsync('UPDATE notes SET text = ? WHERE id = ?', [input.text, id]);
+    return (result.changes ?? 0) > 0;
+  }
+  /** @param {number} id @returns {Promise<Note>} */
+  async get(id) {
+    return await this.db.getAsync('SELECT * FROM notes WHERE id = ?', [id]);
+  }
 }
-

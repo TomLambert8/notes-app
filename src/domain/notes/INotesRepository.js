@@ -28,5 +28,14 @@ export class INotesRepository {
   async remove(id) {
     throw new Error('Not implemented');
   }
+  /** @param {number} id @param {{ text: string }} input @returns {Promise<boolean>} */
+  async update(id, input) {
+    throw new Error('Not implemented');
+  }
+  /** @param {number} id @returns {Promise<Note>} */
+  async get(id) {
+    throw new Error('Not implemented');
+  }
+
 }
 

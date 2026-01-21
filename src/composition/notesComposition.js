@@ -1,8 +1,5 @@
 import { SqliteNotesRepository } from '../data/sqlite/SqliteNotesRepository';
-import { makeCreateNote } from '../domain/notes/usecases/CreateNote';
-import { makeDeleteNote } from '../domain/notes/usecases/DeleteNote';
-import { makeInitNotesDb } from '../domain/notes/usecases/InitNotesDb';
-import { makeListNotes } from '../domain/notes/usecases/ListNotes';
+import { makeCreateNote, makeDeleteNote, makeGetNote, makeInitNotesDb, makeListNotes, makeUpdateNote } from '../domain/notes/usecases/index.js';
 
 // Lazy initialization of repository to avoid issues on web
 let repo = null;
@@ -39,5 +36,17 @@ export const notesUseCases = {
       return makeDeleteNote(repository).execute(id);
     }
   },
+  getNote: {
+    execute: async (id) => {
+      const repository = getRepo();
+      return makeGetNote(repository).execute(id);
+    }
+  },
+  updateNote: {
+    execute: async (id, text) => {
+      const repository = getRepo();
+      return makeUpdateNote(repository).execute(id, text);
+    }
+  }
 };
 

@@ -1,10 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-const NoteItem = ({ note, onDelete }) => {
+const NoteItem = ({ note, onDelete, onEdit }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{note.text}</Text>
+      <TouchableOpacity 
+        style={styles.textContainer} 
+        onPress={() => onEdit(note)}
+      >
+        <Text style={styles.text}>{note.text}</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => onDelete(note.id)} style={styles.deleteButton}>
         <Ionicons name='trash-outline' size={24} color='#ff4444' />
       </TouchableOpacity>
@@ -31,10 +36,12 @@ const styles = StyleSheet.create({
     boxShadowRadius: 3.84,
     elevation: 5,
   },
-  text: {
-    fontSize: 16,
+  textContainer: {
     flex: 1,
     marginRight: 10,
+  },
+  text: {
+    fontSize: 16,
   },
   deleteButton: {
     padding: 5,

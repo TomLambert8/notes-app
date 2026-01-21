@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import NoteItem from "./NoteItem";
 
-const NoteList = ({ notes, onDelete }) => {
+const NoteList = ({ notes, onDelete, onEdit }) => {
 
   return (
     <View style={styles.container}>
@@ -9,7 +9,7 @@ const NoteList = ({ notes, onDelete }) => {
         data={notes}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <NoteItem note={item} onDelete={onDelete} />
+          <NoteItem note={item} onDelete={onDelete} onEdit={onEdit} />
         )}
         contentContainerStyle={styles.listContent}
       />

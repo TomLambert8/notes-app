@@ -50,6 +50,23 @@ export function useNotes() {
     };
   }, [reload]);
 
-  return { notes, ready, error, reload, addNote, deleteNote };
+  const getNote = useCallback(async (id) => {
+    const note = await notesUseCases.getNote.execute(id);
+    return note;
+  }, []);
+  
+  const updateNote = useCallback(async (id, text) => {
+    try {
+      console.log('Updating note:', id, text);
+      const result = await notesUseCases.updateNote.execute(id, text);
+      console.log('Note updated successfully:', result);
+      await reload();
+    } catch (err) {
+      console.error('Error in updateNote:', err);
+      throw err;
+    }
+  }, [reload]);
+
+  return { notes, ready, error, reload, addNote, deleteNote, getNote, updateNote };
 }
 
