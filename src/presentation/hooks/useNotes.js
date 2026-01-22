@@ -58,7 +58,7 @@ export function useNotes() {
   const updateNote = useCallback(async (id, text) => {
     try {
       console.log('Updating note:', id, text);
-      const result = await notesUseCases.updateNote.execute(id, text);
+      const result = await notesUseCases.updateNote.execute(id, { text });
       console.log('Note updated successfully:', result);
       await reload();
     } catch (err) {

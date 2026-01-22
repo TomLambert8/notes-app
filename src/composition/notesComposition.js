@@ -1,12 +1,20 @@
-import { SqliteNotesRepository } from '../data/sqlite/SqliteNotesRepository';
+import { dataSourceConfig } from '../config/dataSource';
+import { RepositoryFactory } from '../data/RepositoryFactory';
 import { makeCreateNote, makeDeleteNote, makeGetNote, makeInitNotesDb, makeListNotes, makeUpdateNote } from '../domain/notes/usecases/index.js';
 
 // Lazy initialization of repository to avoid issues on web
 let repo = null;
 
+/**
+ * Gets or creates the repository instance based on configuration
+ * @returns {import('../domain/notes/INotesRepository').INotesRepository}
+ */
 function getRepo() {
   if (!repo) {
-    repo = new SqliteNotesRepository({ dbName: 'notes.db' });
+    repo = RepositoryFactory.createNotesRepository(
+      dataSourceConfig.type,
+      dataSourceConfig.options
+    );
   }
   return repo;
 }
@@ -43,9 +51,9 @@ export const notesUseCases = {
     }
   },
   updateNote: {
-    execute: async (id, text) => {
+    execute: async (id, input) => {
       const repository = getRepo();
-      return makeUpdateNote(repository).execute(id, text);
+      return makeUpdateNote(repository).execute(id, input);
     }
   }
 };
