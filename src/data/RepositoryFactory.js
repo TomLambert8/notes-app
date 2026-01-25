@@ -1,6 +1,6 @@
 import { ApiNotesRepository } from './api/ApiNotesRepository';
+import { DrizzleNotesRepository } from './drizzle/DrizzleNotesRepository';
 import { MockNotesRepository } from './mock/MockNotesRepository';
-import { SqliteNotesRepository } from './sqlite/SqliteNotesRepository';
 
 /**
  * Factory to create the appropriate repository based on configuration
@@ -8,14 +8,14 @@ import { SqliteNotesRepository } from './sqlite/SqliteNotesRepository';
 export class RepositoryFactory {
   /**
    * Creates a notes repository based on the provided type
-   * @param {'sqlite' | 'api' | 'mock' | 'sqlserver'} type - The type of repository to create
+   * @param {'drizzle' | 'api' | 'mock' | 'sqlserver'} type - The type of repository to create
    * @param {object} config - Configuration options for the repository
    * @returns {import('../domain/notes/INotesRepository').INotesRepository}
    */
-  static createNotesRepository(type = 'sqlite', config = {}) {
+  static createNotesRepository(type = 'drizzle', config = {}) {
     switch (type) {
-      case 'sqlite':
-        return new SqliteNotesRepository(config);
+      case 'drizzle':
+        return new DrizzleNotesRepository(config);
       
       case 'api':
         return new ApiNotesRepository(config);

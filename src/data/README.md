@@ -9,18 +9,18 @@ Domain (Business Logic)
     ↓ depends on
 INotesRepository (Interface/Contract)
     ↑ implemented by
-Concrete Repositories (SQLite, API, SQL Server, etc.)
+Concrete Repositories (Drizzle ORM, API, SQL Server, etc.)
 ```
 
 ## Changer de source de données
 
 Pour changer de source de données, modifiez simplement `src/config/dataSource.js` :
 
-### Option 1: SQLite Local (par défaut)
+r### Option 1: Drizzle ORM with Expo SQLite (par défaut)
 
 ```javascript
 export const dataSourceConfig = {
-  type: 'sqlite',
+  type: 'drizzle',
   options: {
     dbName: 'notes.db',
   }

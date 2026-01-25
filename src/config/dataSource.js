@@ -3,12 +3,12 @@
  * Change this to switch between different data sources
  */
 export const dataSourceConfig = {
-  // Type of repository: 'sqlite', 'api', 'sqlserver'
-  type: 'sqlite',
+  // Type of repository: 'drizzle', 'api', 'sqlserver'
+  type: 'drizzle',
   
   // Configuration options for the selected repository
   options: {
-    // SQLite options
+    // Drizzle/Expo SQLite options
     dbName: 'notes.db',
     
     // Future API options (when implemented)
