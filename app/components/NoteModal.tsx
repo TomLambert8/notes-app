@@ -6,20 +6,30 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import type { Note } from '../../src/domain/notes/types';
 
-const NoteModal = ({
+type Props = {
+  modalVisible: boolean;
+  setModalVisible: (v: boolean) => void;
+  newNote: string;
+  setNewNote: (v: string) => void;
+  onSave: (text: string, noteId?: number) => void;
+  editingNote: Note | null;
+};
+
+export default function NoteModal({
   modalVisible,
   setModalVisible,
   newNote,
   setNewNote,
   onSave,
   editingNote = null,
-}) => {
+}: Props) {
   const isEditing = editingNote !== null;
 
   const handleSave = () => {
     if (newNote.trim()) {
-      onSave(newNote, editingNote?.id);
+      onSave(newNote.trim(), editingNote?.id);
       setModalVisible(false);
       setNewNote('');
     }
@@ -28,8 +38,8 @@ const NoteModal = ({
   return (
     <Modal
       visible={modalVisible}
-      animationType='slide'
-      transparent={true}
+      animationType="slide"
+      transparent
       onRequestClose={() => setModalVisible(false)}
     >
       <View style={styles.modalOverlay}>
@@ -37,16 +47,16 @@ const NoteModal = ({
           <Text style={styles.modalTitle}>{isEditing ? 'Edit Note' : 'Add Note'}</Text>
           <TextInput
             style={styles.input}
-            placeholder='Write here...'
-            placeholderTextColor='#999'
-            value={newNote || ''}
-            onChangeText={(text) => setNewNote(text)}
-            multiline={true}
+            placeholder="Write here..."
+            placeholderTextColor="#999"
+            value={newNote}
+            onChangeText={setNewNote}
+            multiline
             numberOfLines={4}
-            textAlignVertical='top'
+            textAlignVertical="top"
           />
           <View style={styles.modalButtons}>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.cancelButton}
               onPress={() => {
                 setNewNote('');
@@ -55,10 +65,7 @@ const NoteModal = ({
             >
               <Text style={styles.cancelButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
-              style={styles.saveButton}
-              onPress={handleSave}
-            >
+            <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
               <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
           </View>
@@ -66,7 +73,7 @@ const NoteModal = ({
       </View>
     </Modal>
   );
-};
+}
 
 const styles = StyleSheet.create({
   modalOverlay: {
@@ -97,10 +104,7 @@ const styles = StyleSheet.create({
     minHeight: 100,
     textAlignVertical: 'top',
   },
-  modalButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+  modalButtons: { flexDirection: 'row', justifyContent: 'space-between' },
   cancelButton: {
     backgroundColor: '#ccc',
     padding: 10,
@@ -109,10 +113,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     alignItems: 'center',
   },
-  cancelButtonText: {
-    fontSize: 16,
-    color: '#333',
-  },
+  cancelButtonText: { fontSize: 16, color: '#333' },
   saveButton: {
     backgroundColor: '#007bff',
     padding: 10,
@@ -120,10 +121,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  saveButtonText: {
-    fontSize: 16,
-    color: '#fff',
-  },
+  saveButtonText: { fontSize: 16, color: '#fff' },
 });
-
-export default NoteModal;

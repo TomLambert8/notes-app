@@ -14,11 +14,11 @@ Concrete Repositories (Drizzle ORM, API, SQL Server, etc.)
 
 ## Changer de source de données
 
-Pour changer de source de données, modifiez simplement `src/config/dataSource.js` :
+Pour changer de source de données, modifiez simplement `src/config/dataSource.ts` :
 
-r### Option 1: Drizzle ORM with Expo SQLite (par défaut)
+### Option 1: Drizzle ORM with Expo SQLite (par défaut)
 
-```javascript
+```typescript
 export const dataSourceConfig = {
   type: 'drizzle',
   options: {
